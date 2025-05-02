@@ -6,7 +6,7 @@ const generateToken = require('../utils/generateToken');
 const {
     sendVerificationEmail,
     sendWelcomeEmail,
-    sendPasswordResetEmail,
+    sendPasswordReset,
     sentResetSuccessEmail
 } = require('../mailtrap/email');
 
@@ -163,7 +163,7 @@ const forgetPassword = async(req,res)=>{
         await user.save();
 
         // sent email...
-        await sendPasswordResetEmail(user.email, `${process.env.CLIENT_URL}/reset-password/${resetToken}`);
+        await sendPasswordReset(user.email, `${process.env.CLIENT_URL}/reset-password/${resetToken}`);
 
         return res.status(200).json({message: "Email send..."})
     }
